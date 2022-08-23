@@ -1,4 +1,4 @@
-package com.wanfeng.dingyuehao.component.callback;
+package com.wanfeng.dingyuehao.component.eventCallback;
 
 
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;

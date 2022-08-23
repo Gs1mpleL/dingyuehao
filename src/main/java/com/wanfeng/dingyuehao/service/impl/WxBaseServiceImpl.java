@@ -1,7 +1,7 @@
 package com.wanfeng.dingyuehao.service.impl;
 
-import com.wanfeng.dingyuehao.component.callback.EventHandlerSelector;
-import com.wanfeng.dingyuehao.component.command.CommandSelector;
+import com.wanfeng.dingyuehao.component.eventCallback.EventHandlerSelector;
+import com.wanfeng.dingyuehao.component.commandCallBack.CommandSelector;
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;
 import com.wanfeng.dingyuehao.domain.VO.WxBaseVo;
 import com.wanfeng.dingyuehao.domain.prop.CommandProp;

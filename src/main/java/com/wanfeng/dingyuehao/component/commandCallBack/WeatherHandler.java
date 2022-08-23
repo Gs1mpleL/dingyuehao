@@ -1,4 +1,4 @@
-package com.wanfeng.dingyuehao.component.command;
+package com.wanfeng.dingyuehao.component.commandCallBack;
 
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;
 import com.wanfeng.dingyuehao.domain.VO.WeatherForecast;

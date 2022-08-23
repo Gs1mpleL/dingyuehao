@@ -1,4 +1,4 @@
-package com.wanfeng.dingyuehao.component.command;
+package com.wanfeng.dingyuehao.component.commandCallBack;
 
 import com.wanfeng.dingyuehao.domain.Enum.PaymentEnum;
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;

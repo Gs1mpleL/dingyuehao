@@ -1,4 +1,4 @@
-package com.wanfeng.dingyuehao.component.command;
+package com.wanfeng.dingyuehao.component.commandCallBack;
 
 import com.wanfeng.dingyuehao.domain.Enum.PaymentEnum;
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.regex.Matcher;
 
-import static com.wanfeng.dingyuehao.component.command.SalaryHandler.insertAndReturnRecord;
+import static com.wanfeng.dingyuehao.component.commandCallBack.SalaryHandler.insertAndReturnRecord;
 
 @Component("消费")
 public class PaymentHandler implements CommandHandler{
