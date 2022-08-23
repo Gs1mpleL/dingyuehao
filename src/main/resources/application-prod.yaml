@@ -19,4 +19,10 @@ spring:
   redis:
     host: xxx
     port: 6379
-    password: xx
+    password: Liuzhuohao123
+
+logging:
+  level:
+    org:
+      springframework: error
+    com.wanfeng.dingyuehao: error
