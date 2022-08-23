@@ -22,4 +22,7 @@ public class StringTemplate {
             "结余:[%s]";
 
     public final static String PaymentNULLTemplate = "删除成功!\n本日无消费记录";
+
+    public final static String NoteRecord = "%s日志:\n" +
+            "%s";
 }
