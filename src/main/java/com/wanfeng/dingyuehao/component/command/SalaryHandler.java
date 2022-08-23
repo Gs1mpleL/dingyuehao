@@ -4,7 +4,6 @@ import com.wanfeng.dingyuehao.domain.Enum.PaymentEnum;
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;
 import com.wanfeng.dingyuehao.domain.VO.PaymentReq;
 import com.wanfeng.dingyuehao.domain.VO.PaymentResp;
-import com.wanfeng.dingyuehao.domain.rediskey.PaymentKey;
 import com.wanfeng.dingyuehao.domain.template.StringTemplate;
 import com.wanfeng.dingyuehao.service.PaymentService;
 import com.wanfeng.dingyuehao.util.MsgUtils;
@@ -25,14 +24,14 @@ public class SalaryHandler implements CommandHandler{
     @Transactional(rollbackFor = Exception.class)
     @Override
     public String handler(Matcher matcher, MsgReq msgReq) {
-
-        return insertAndReturnRecord(matcher, msgReq, paymentService);
-    }
-
-    static String insertAndReturnRecord(Matcher matcher, MsgReq msgReq,  PaymentService paymentService) {
         PaymentReq paymentReq = new PaymentReq();
         paymentReq.setUserid(msgReq.getFromUserName());
         paymentReq.setType(PaymentEnum.Salary.getType());
+        return insertAndReturnRecord(matcher, msgReq, paymentService,paymentReq);
+    }
+
+    static String insertAndReturnRecord(Matcher matcher, MsgReq msgReq, PaymentService paymentService, PaymentReq paymentReq) {
+
         switch (matcher.group(2)) {
             case "本日":
                 return getOneDayRecord(msgReq, paymentService);
@@ -63,19 +62,28 @@ public class SalaryHandler implements CommandHandler{
 
     private static String getOneDayRecord(MsgReq msgReq, PaymentService paymentService) {
         PaymentResp curDay = paymentService.getCurDay(msgReq.getFromUserName());
+        if (curDay == null){
+            return MsgUtils.buildReply(msgReq,"本日无记录");
+        }
         String format = String.format(StringTemplate.PaymentTemplate, "本日",curDay.getPay(), curDay.getSalary(), curDay.getRemain());
         return MsgUtils.buildReply(msgReq, format);
     }
 
     private static String getOneMonthRecord(MsgReq msgReq, PaymentService paymentService) {
         PaymentResp curMonth = paymentService.getCurMonth(msgReq.getFromUserName());
+        if (curMonth == null){
+            return MsgUtils.buildReply(msgReq,"本月无记录");
+        }
         String format = String.format(StringTemplate.PaymentTemplate, "本月",curMonth.getPay(), curMonth.getSalary(), curMonth.getRemain());
         return MsgUtils.buildReply(msgReq, format);
     }
 
     private static String getAllRecord(MsgReq msgReq, PaymentService paymentService) {
-        PaymentResp curDay = paymentService.getAll(msgReq.getFromUserName());
-        String format = String.format(StringTemplate.PaymentTemplate, "全部", curDay.getPay(), curDay.getSalary(), curDay.getRemain());
+        PaymentResp all = paymentService.getAll(msgReq.getFromUserName());
+        if (all == null){
+            return MsgUtils.buildReply(msgReq,"无记录");
+        }
+        String format = String.format(StringTemplate.PaymentTemplate, "全部", all.getPay(), all.getSalary(), all.getRemain());
         return MsgUtils.buildReply(msgReq, format);
     }
 

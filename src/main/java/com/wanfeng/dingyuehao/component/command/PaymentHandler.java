@@ -2,8 +2,8 @@ package com.wanfeng.dingyuehao.component.command;
 
 import com.wanfeng.dingyuehao.domain.Enum.PaymentEnum;
 import com.wanfeng.dingyuehao.domain.VO.MsgReq;
-import com.wanfeng.dingyuehao.domain.VO.PaymentReq;
 
+import com.wanfeng.dingyuehao.domain.VO.PaymentReq;
 import com.wanfeng.dingyuehao.service.PaymentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,10 @@ public class PaymentHandler implements CommandHandler{
     @Transactional(rollbackFor = Exception.class)
     @Override
     public String handler(Matcher matcher, MsgReq msgReq) {
-        return insertAndReturnRecord(matcher, msgReq, paymentService);
+        PaymentReq paymentReq = new PaymentReq();
+        paymentReq.setUserid(msgReq.getFromUserName());
+        paymentReq.setType(PaymentEnum.Pay.getType());
+        return insertAndReturnRecord(matcher, msgReq, paymentService, paymentReq);
     }
 
     @Override
