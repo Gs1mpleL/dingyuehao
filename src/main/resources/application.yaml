@@ -1,0 +1,22 @@
+
+gaode:
+  key: xxx
+  cityAndCode:
+    - 和平区_120101
+    - 霍州市_141082
+
+# 语法解析正则
+command:
+  regex:
+    - "(帮助)"
+    - "(重复) (.*)"
+    - "(群发) (.*) (.*)"
+    - "(天气)"
+    - "(消费) (.*)"
+    - "(收入) (.*)"
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: dingyuehao
