@@ -17,6 +17,6 @@ public class RepeatHandler implements CommandHandler{
 
     @Override
     public String desc() {
-        return "让服务器重复你的话 \n语法：重复 [需要重复的话]";
+        return "让服务器重复你的话 \n重复 [需要重复的话]";
     }
 }

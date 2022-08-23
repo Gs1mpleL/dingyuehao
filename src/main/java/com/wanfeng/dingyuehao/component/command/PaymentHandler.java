@@ -32,6 +32,6 @@ public class PaymentHandler implements CommandHandler{
 
     @Override
     public String desc() {
-        return "添加一条消费记录";
+        return "添加一条消费记录\n消费 [金额/本日/本月/全部]";
     }
 }

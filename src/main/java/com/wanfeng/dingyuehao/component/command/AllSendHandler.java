@@ -34,6 +34,6 @@ public class AllSendHandler implements CommandHandler{
 
     @Override
     public String desc() {
-        return "发送消息给所有关注者\n语法:群发 [文本] [密码]";
+        return "发送消息给所有关注者\n语法:群发 [文本] [密码]\n个人开发者目前不支持";
     }
 }

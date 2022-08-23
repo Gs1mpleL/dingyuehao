@@ -18,20 +18,20 @@ public class HelpHandler implements CommandHandler{
     @Override
     public String handler(Matcher matcher, MsgReq msgReq) {
         if (msgReq.getContent().length()==2){
-            String collect = "目前支持的语法有:\n------\n";
+            String collect = "目前支持的语法有:\n------------------\n";
             collect += String.join("\n", commandProp.getRegex());
             collect = collect.replace("(", "");
             collect = collect.replace(")","");
+            collect = collect.replace("*","");
+            collect = collect.replace(".","");
             collect = collect.replace(".*","[xx]");
-            collect += "\n-----\n你也可以输入 帮助 [具体命令] 来查看命令的详细介绍";
+            collect += "\n-----------------\n你也可以输入 帮助 [具体命令] 来查看命令的详细介绍";
             return MsgUtils.buildReply(msgReq,collect);
         }else {
             String commandToDesc = msgReq.getContent().substring(3);
             CommandHandler bean = (CommandHandler) applicationContext.getBean(commandToDesc);
             return MsgUtils.buildReply(msgReq,bean.desc());
         }
-
-
 
     }
 

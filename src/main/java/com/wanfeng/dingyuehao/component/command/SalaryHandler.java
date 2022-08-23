@@ -103,6 +103,6 @@ public class SalaryHandler implements CommandHandler{
 
     @Override
     public String desc() {
-        return "添加一条收入记录";
+        return "添加一条收入记录\n收入 [金额/本日/本月/全部]";
     }
 }

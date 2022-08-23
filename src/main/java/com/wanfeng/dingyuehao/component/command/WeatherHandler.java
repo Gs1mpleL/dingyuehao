@@ -21,9 +21,16 @@ public class WeatherHandler implements CommandHandler{
 
     @Override
     public String handler(Matcher matcher, MsgReq msgReq) {
-        WeatherResp weather = weatherService.getLiveWeather("和平区");
+        String city = null;
+        try {
+            city = matcher.group(2).replace(" ","");
+
+        }catch (Exception e){
+            city = "上海市";
+        }
+        WeatherResp weather = weatherService.getLiveWeather(city);
         WeatherLive live = weather.getLives().get(0);
-        WeatherResp forecastWeather = weatherService.getForecastWeather("和平区");
+        WeatherResp forecastWeather = weatherService.getForecastWeather(city);
         WeatherForecast weatherForecast = forecastWeather.getForecasts().get(0);
         String collect = weatherForecast.getCasts().stream().map(i->{
             String week = i.getDate();
@@ -31,12 +38,12 @@ public class WeatherHandler implements CommandHandler{
             String daytemp = i.getDaytemp();
             return week+":"+dayweather+","+daytemp+"℃";
         }).collect(Collectors.joining("\n"));
-        String reply = String.format(StringTemplate.WeatherTemplate,"和平区",live.getWeather(),live.getTemperature()+"℃",live.getWindpower(),"\n"+collect+"\n");
+        String reply = String.format(StringTemplate.WeatherTemplate,city,live.getWeather(),live.getTemperature()+"℃",live.getWindpower(),"\n"+collect+"\n");
         return MsgUtils.buildReply(msgReq,reply);
     }
 
     @Override
     public String desc() {
-        return "查询当前天气以及天气预报";
+        return "查询当前天气以及天气预报\n天气 [城市名（不填默认上海市）]";
     }
 }
