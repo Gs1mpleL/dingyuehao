@@ -19,7 +19,7 @@ spring:
   redis:
     host: xxx
     port: 6379
-    password: Liuzhuohao123
+    password: xxx
 
 logging:
   level:
