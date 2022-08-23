@@ -73,6 +73,7 @@ public class WxBaseServiceImpl implements WxBaseService {
         }
         log.info("语法解析开始");
         for (Pattern pattern : patterns) {
+            log.info(pattern.toString()+"->"+msgReq.getContent());
             Matcher matcher = pattern.matcher(msgReq.getContent());
             if (matcher.find()){
                 String command = matcher.group(1);
