@@ -71,7 +71,6 @@ public class WxBaseServiceImpl implements WxBaseService {
         if (CollectionUtils.isEmpty(patterns)){
             init();
         }
-        log.info("语法解析开始");
         for (Pattern pattern : patterns) {
             log.info(pattern.toString()+"->"+msgReq.getContent());
             Matcher matcher = pattern.matcher(msgReq.getContent());
