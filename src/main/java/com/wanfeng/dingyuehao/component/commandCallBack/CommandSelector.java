@@ -12,14 +12,9 @@ import java.util.regex.Matcher;
 
 @Component
 public class CommandSelector {
-    @Autowired
-    private ApplicationContext applicationContext;
-    Map<String, CommandHandler> handlerMap;
 
-    @PostConstruct
-    public void init() {
-        handlerMap = applicationContext.getBeansOfType(CommandHandler.class);
-    }
+    @Autowired
+    Map<String, CommandHandler> handlerMap;
 
     public String select(Matcher matcher, MsgReq msgReq){
         if (handlerMap.get(matcher.group(1)) == null) {

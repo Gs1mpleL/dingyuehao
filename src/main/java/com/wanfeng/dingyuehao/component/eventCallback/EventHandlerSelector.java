@@ -12,14 +12,8 @@ import java.util.Map;
 @Component
 @Slf4j
 public class EventHandlerSelector {
-
     @Autowired
-    private ApplicationContext applicationContext;
     Map<String, EventHandler> eventHandlerMap;
-    @PostConstruct
-    public void init(){
-        eventHandlerMap = applicationContext.getBeansOfType(EventHandler.class);
-    }
 
     public void select(MsgReq msgReq){
         if (eventHandlerMap.get(msgReq.getEvent()) == null) {
