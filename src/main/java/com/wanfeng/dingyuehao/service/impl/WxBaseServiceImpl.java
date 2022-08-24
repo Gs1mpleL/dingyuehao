@@ -12,6 +12,7 @@ import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -64,12 +65,13 @@ public class WxBaseServiceImpl implements WxBaseService {
         }
         return replyUser(msgReq);
     }
+    @Value("${image.path}")
+    private String path;
 
     @Override
     public Object handleImage(MsgReq msgFromUser) {
-        String imageString = MsgUtils.urlImage2String(msgFromUser.getPicUrl());
-        MsgUtils.string2ImageAndSave("/Users/liuzhuohao/Documents/javaProject/dingyuehao/"+new Date(),imageString);
-        return MsgUtils.buildReply(msgFromUser,"没错，这是一张图片");
+        String imageString = MsgUtils.urlImage2String(msgFromUser.getPicUrl(),path +new Date().getTime()+".jpg");
+        return MsgUtils.buildReply(msgFromUser,"保存地址：["+path +new Date().getTime()+".jpg"+"]");
     }
 
     /**

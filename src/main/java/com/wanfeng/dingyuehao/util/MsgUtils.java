@@ -185,7 +185,7 @@ public class MsgUtils {
         return MsgUtils.textMessageToXml(msgResp);
     }
 
-    public static String urlImage2String(String imgUrl) {
+    public static String urlImage2String(String imgUrl,String path) {
         URL url = null;
         InputStream is = null;
         ByteArrayOutputStream outStream = null;
@@ -206,8 +206,37 @@ public class MsgUtils {
                 //用输出流往buffer里写入数据，中间参数代表从哪个位置开始读，len代表读取的长度
                 outStream.write(buffer, 0, len);
             }
+            byte[] bytes = outStream.toByteArray();
             // 对字节数组Base64编码
-            return encodeImage(outStream.toByteArray());
+            File file = null;
+            BufferedOutputStream bos = null;
+            java.io.FileOutputStream fos = null;
+            try {
+                file = new File(path);
+                if (!file.exists()){
+                    file.createNewFile();
+                }
+                fos = new java.io.FileOutputStream(file);
+                bos = new BufferedOutputStream(fos);
+                bos.write(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bos != null) {
+                    try {
+                        bos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }

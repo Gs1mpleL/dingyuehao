@@ -26,3 +26,6 @@ logging:
     org:
       springframework: error
     com.wanfeng.dingyuehao: error
+
+image:
+  path: "/root/image/"
