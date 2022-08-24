@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,6 +67,8 @@ public class WxBaseServiceImpl implements WxBaseService {
 
     @Override
     public Object handleImage(MsgReq msgFromUser) {
+        String imageString = MsgUtils.urlImage2String(msgFromUser.getPicUrl());
+        MsgUtils.string2ImageAndSave("/Users/liuzhuohao/Documents/javaProject/dingyuehao/"+new Date(),imageString);
         return MsgUtils.buildReply(msgFromUser,"没错，这是一张图片");
     }
 
