@@ -54,7 +54,7 @@ public class WxBaseServiceImpl implements WxBaseService {
     }
 
     @Override
-    public Object handle(MsgReq msgReq) {
+    public Object handleText(MsgReq msgReq) {
         if (!StringUtil.isNullOrEmpty(msgReq.getEvent())){
             log.info("触发事件[{}]",msgReq.getEvent());
             // 事件处理器选择器
@@ -62,6 +62,11 @@ public class WxBaseServiceImpl implements WxBaseService {
             return null;
         }
         return replyUser(msgReq);
+    }
+
+    @Override
+    public Object handleImage(MsgReq msgFromUser) {
+        return MsgUtils.buildReply(msgFromUser,"没错，这是一张图片");
     }
 
     /**

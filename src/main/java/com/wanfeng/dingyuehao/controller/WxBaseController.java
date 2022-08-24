@@ -6,6 +6,7 @@ import com.wanfeng.dingyuehao.service.MsgSendService;
 import com.wanfeng.dingyuehao.service.TagService;
 import com.wanfeng.dingyuehao.service.WeatherService;
 import com.wanfeng.dingyuehao.service.WxBaseService;
+import com.wanfeng.dingyuehao.util.MsgUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,16 @@ public class WxBaseController {
 
     @PostMapping(value = "/validate", produces = {"application/xml"})
     public Object getMsg(@RequestBody MsgReq msgFromUser) {
-        return wxBaseService.handle(msgFromUser);
+        log.info("用户消息[{}]",msgFromUser);
+        switch (msgFromUser.getMsgType()){
+            case MsgUtils.REQ_MESSAGE_TYPE_TEXT:
+                return wxBaseService.handleText(msgFromUser);
+            case MsgUtils.REQ_MESSAGE_TYPE_IMAGE:
+                return wxBaseService.handleImage(msgFromUser);
+            default:
+                MsgUtils.buildReply(msgFromUser,"消息类型无法处理");
+        }
+        return MsgUtils.buildReply(msgFromUser,"消息类型无法处理");
     }
 
     @GetMapping("/sendAll")

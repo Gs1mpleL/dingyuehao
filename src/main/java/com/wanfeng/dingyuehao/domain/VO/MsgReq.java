@@ -34,10 +34,6 @@ public class MsgReq {
 
     @JacksonXmlProperty(localName = "Idx")
     private String idx;
-
-    @Override
-    public String toString() {
-        String format = "------\n[%s]->[%s]\ntype=[%s]\ncontent=[%s]\n-------";
-        return String.format(format, fromUserName, toUserName, msgType, content);
-    }
+    @JacksonXmlProperty(localName = "PicUrl")
+    private String picUrl;
 }

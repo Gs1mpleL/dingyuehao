@@ -7,5 +7,7 @@ import com.wanfeng.dingyuehao.domain.VO.WxBaseVo;
 public interface WxBaseService {
     boolean check(WxBaseVo wxBaseVo);
 
-    Object handle(MsgReq msgReq);
+    Object handleText(MsgReq msgReq);
+
+    Object handleImage(MsgReq msgFromUser);
 }
