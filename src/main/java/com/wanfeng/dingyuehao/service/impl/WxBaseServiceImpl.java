@@ -70,8 +70,9 @@ public class WxBaseServiceImpl implements WxBaseService {
 
     @Override
     public Object handleImage(MsgReq msgFromUser) {
-        String imageString = MsgUtils.urlImage2String(msgFromUser.getPicUrl(),path +new Date().getTime()+".jpg");
-        return MsgUtils.buildReply(msgFromUser,"保存地址：["+path +new Date().getTime()+".jpg"+"]");
+        String pathInOs  = path +new Date().getTime()+".jpg";
+        MsgUtils.urlImage2String(msgFromUser.getPicUrl(),pathInOs);
+        return MsgUtils.buildReply(msgFromUser,"保存地址：["+pathInOs+"]");
     }
 
     /**
