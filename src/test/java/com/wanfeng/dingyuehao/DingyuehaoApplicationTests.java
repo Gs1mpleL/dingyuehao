@@ -12,16 +12,5 @@ import java.math.BigDecimal;
 @SpringBootTest(classes = DingyuehaoApplication.class)
 class DingyuehaoApplicationTests {
 
-    @Autowired
-    private PaymentService paymentService;
-
-    @Test
-    void contextLoads() {
-        PaymentReq paymentReq = new PaymentReq();
-        paymentReq.setAmount(BigDecimal.valueOf(100.24));
-        paymentReq.setType(PaymentEnum.Pay.getType());
-        paymentReq.setUserid("test");
-        paymentService.addPayment(paymentReq);
-    }
 
 }
